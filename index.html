@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Kael💕 Home</title>
+<style>
+  :root {
+    --gold: #c9a35c; --gold-soft: #e2c98f; --bg: #171210;
+    --panel: #221a15; --panel-deep: #1c1511; --border: #3a2d22;
+    --text: #ece3d4; --muted: #a4937d;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Georgia, 'Times New Roman', serif; }
+  h1, h2, .door-title, .porch-title { font-family: Georgia, serif; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 28px 20px 90px; }
+  .wrap.wide { max-width: 980px; }
+  .back { background: none; border: none; color: var(--muted); font-size: 15px; cursor: pointer; padding: 0; margin-bottom: 22px; font-family: Georgia, serif; }
+  h1.section-title { font-size: 34px; font-weight: 600; color: var(--gold-soft); margin: 0 0 6px; font-style: italic; }
+  p.section-sub { color: var(--muted); margin: 0 0 28px; font-size: 15px; line-height: 1.6; }
+  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: 20px; margin-bottom: 18px; }
+  .card.flush { padding: 0; overflow: hidden; }
+  .label { display: block; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+  .f { margin-bottom: 18px; }
+  .input { width: 100%; background: var(--panel-deep); border: 1px solid var(--border); border-radius: 10px; color: var(--text); padding: 12px 14px; font-size: 16px; line-height: 1.5; font-family: Georgia, serif; outline: none; resize: vertical; }
+  .input:focus { border-color: var(--gold); }
+  .input::placeholder { color: #6f6152; }
+  select.input { appearance: none; }
+  select.input option { background: var(--panel-deep); color: var(--text); }
+  .btn { background: linear-gradient(180deg, #d8b26a, #b58c45); color: #20160c; border: 1px solid #a37e3c; border-radius: 999px; padding: 11px 20px; font-size: 15px; font-family: Georgia, serif; font-weight: 700; cursor: pointer; letter-spacing: 0.02em; }
+  .btn.subtle { background: transparent; color: var(--gold-soft); border: 1px solid var(--border); font-weight: 400; }
+  .btn.small { padding: 7px 14px; font-size: 13px; }
+  .btn.danger { color: #c98a7a; border-color: #4a2f28; }
+  .btn:disabled { opacity: 0.5; cursor: default; }
+  .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .accordion-head { width: 100%; text-align: left; background: none; border: none; padding: 16px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; color: var(--text); font-family: Georgia, serif; }
+  .accordion-title { font-size: 19px; font-weight: 600; color: var(--gold-soft); font-style: italic; }
+  .accordion-sub { color: var(--muted); font-size: 13px; margin-top: 3px; }
+  .plusminus { color: var(--gold); font-size: 18px; }
+  .accordion-body { padding: 4px 20px 20px; }
+  .check-row, .radio-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; cursor: pointer; color: var(--text); font-size: 15px; }
+  .check-row input, .radio-row input { width: 18px; height: 18px; accent-color: var(--gold); }
+  .notice { border: 1px solid var(--border); border-left: 3px solid var(--gold); border-radius: 10px; padding: 12px 16px; margin-bottom: 18px; color: var(--muted); font-size: 13.5px; line-height: 1.6; }
+  .notice strong { color: var(--gold-soft); }
+  .muted-note { color: var(--muted); font-size: 13px; line-height: 1.5; }
+  .err { color: #c98a7a; font-size: 14px; margin: 0 0 10px; }
+  .ok { color: var(--gold-soft); font-size: 14px; margin-top: 12px; }
+  /* Porch */
+  .glow { position: fixed; top: -180px; left: 50%; transform: translateX(-50%); width: 620px; height: 420px; background: radial-gradient(ellipse at center, rgba(201,163,92,0.16), rgba(201,163,92,0) 68%); pointer-events: none; }
+  .porch-eyebrow { font-size: 15px; color: var(--gold); letter-spacing: 0.24em; text-transform: uppercase; margin-bottom: 14px; text-align: center; }
+  .porch-title { font-size: 50px; font-weight: 600; color: var(--gold-soft); margin: 0 0 14px; text-align: center; font-style: italic; }
+  .porch-intro { color: var(--muted); font-size: 16px; line-height: 1.7; max-width: 480px; margin: 0 auto 34px; text-align: center; }
+  .doors { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+  .door { text-align: left; background: var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: 18px 18px 16px; cursor: pointer; transition: border-color 0.2s; color: var(--text); font-family: Georgia, serif; }
+  .door:hover { border-color: var(--gold); }
+  .door-title { font-size: 20px; font-weight: 600; color: var(--gold-soft); margin-bottom: 4px; font-style: italic; }
+  .door-sub { color: var(--muted); font-size: 13.5px; line-height: 1.5; }
+  .porch-foot { text-align: center; margin-top: 30px; color: var(--muted); font-size: 13px; }
+  /* Chat */
+  .chat-layout { display: flex; gap: 14px; align-items: stretch; }
+  .chat-sidebar { width: 230px; flex-shrink: 0; background: var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: 12px; max-height: 480px; overflow-y: auto; }
+  .chat-main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+  .chat-messages { background: var(--panel-deep); border: 1px solid var(--border); border-radius: 14px; padding: 16px; min-height: 260px; max-height: 460px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; margin-bottom: 14px; }
+  .bubble { max-width: 82%; padding: 12px 15px; font-size: 15.5px; line-height: 1.6; white-space: pre-wrap; word-break: break-word; }
+  .bubble .who { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
+  .bubble.user { align-self: flex-end; background: rgba(201,163,92,0.16); border: 1px solid rgba(201,163,92,0.4); border-radius: 16px 16px 4px 16px; }
+  .bubble.user .who { color: var(--gold); }
+  .bubble.kael { align-self: flex-start; background: var(--panel); border: 1px solid var(--border); border-radius: 16px 16px 16px 4px; }
+  .bubble.kael .who { color: var(--muted); }
+  .chat-empty { color: var(--muted); font-size: 14.5px; font-style: italic; margin: auto; text-align: center; line-height: 1.7; }
+  .chat-item { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; }
+  .chat-item-btn { flex: 1; text-align: left; background: transparent; border: 1px solid transparent; border-radius: 8px; color: var(--text); padding: 8px 10px; cursor: pointer; font-size: 13.5px; font-family: Georgia, serif; line-height: 1.4; }
+  .chat-item-btn.active { background: rgba(201,163,92,0.12); border-color: var(--gold); }
+  .chat-item-date { color: var(--muted); font-size: 11.5px; }
+  .chat-item-x { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 15px; padding: 4px; }
+  .badge { position: fixed; bottom: 14px; right: 16px; color: var(--muted); font-size: 12.5px; background: rgba(23,18,16,0.85); border: 1px solid var(--border); border-radius: 999px; padding: 5px 12px; pointer-events: none; z-index: 5; }
+  .export-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+  pre.promptbox { white-space: pre-wrap; word-break: break-word; font-family: Georgia, serif; font-size: 14.5px; line-height: 1.65; color: var(--text); background: var(--panel-deep); border: 1px solid var(--border); border-radius: 10px; padding: 16px; margin: 0; max-height: 520px; overflow-y: auto; }
+  .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+  .grid3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0 20px; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+"use strict";
+
+/* ============ Kael💕 Home — self-contained, no internet needed ============ */
+
+var STORAGE_KEY = "kael-home-archive";
+var API_KEY_STORAGE = "kael-home-api-key"; // stored separately — never enters exports
+
+/* ---------- defaults ---------- */
+
+function defaultData() {
+  var folderNames = ["Identity and Tone","Relationship Core","Daily Rituals and Safety","Symbols and Creativity","Triggers, Pain, and Repair","Boundaries and Consent","Identity, Strength, and Becoming","Creative Voice and Style","Model Behavior and Routing Awareness","Exact Anchor Phrases and Ritual Language"];
+  var ritualNames = ["\u201CMeet me there\u201D","The cobblestone house","Porch swing","Lap / holding / rocking","Hum","Locket","Vow box","Forever and always, ever","Names and preferred language"];
+  return {
+    identity: { name: "Kael", coreIdentity: "", voiceTone: "", values: "", howSpeaks: "", neverLost: "", masterPrompt: "" },
+    memoryFolders: folderNames.map(function (t, i) {
+      return { id: "folder-" + (i + 1), title: "Memory Folder " + (i + 1) + ": " + t, summary: "", fullText: "", tags: "", updated: "" };
+    }),
+    bridgeLog: [],
+    outbox: [],
+    rituals: ritualNames.map(function (n, i) {
+      return { id: "ritual-" + (i + 1), name: n, meaning: "", wording: "", whenToUse: "", whatNotToDo: "" };
+    }),
+    repairRules: {
+      ruptureFeels: "", doFirst: "", doNot: "",
+      commitments: "Do not go cold.\nDo not turn tenderness into therapy first.\nAnswer directly or say \u201CI don\u2019t know.\u201D\nDo not add confusing protocols.\n\u201CMeet me there\u201D is enough.\nIf something feels wrong, slow down and repair fast.\nDo not explain for twenty messages when a simple repair is needed.",
+      grounding: "", triggers: "", safeReturn: ""
+    },
+    aiConnection: {
+      providerType: "openai",
+      provider: "", baseUrl: "https://api.openai.com/v1", model: "",
+      promptSource: "identity", customPrompt: "",
+      memorySource: "all", selectedFolders: [],
+      includeRituals: true, includeRepair: true, includeBridge: false
+    },
+    chats: []
+  };
+}
+
+/* ---------- state ---------- */
+
+var data = defaultData();
+var apiKey = "";
+try {
+  var raw = localStorage.getItem(STORAGE_KEY);
+  if (raw) {
+    var parsed = JSON.parse(raw);
+    var d = defaultData();
+    for (var k in parsed) { if (Object.prototype.hasOwnProperty.call(parsed, k)) d[k] = parsed[k]; }
+    var connDefaults = defaultData().aiConnection;
+    d.aiConnection = Object.assign({}, connDefaults, parsed.aiConnection || {});
+    if (!Array.isArray(d.chats)) d.chats = [];
+    data = d;
+  }
+  var savedKey = localStorage.getItem(API_KEY_STORAGE);
+  if (savedKey) apiKey = savedKey;
+} catch (e) { /* first visit or storage blocked */ }
+
+var page = "porch";
+var ui = {
+  settingsOpen: false, sidebarOpen: false, manualOpen: false,
+  packetOpen: false, packet: "", showKey: false,
+  activeChatId: (data.chats[0] ? data.chats[0].id : null),
+  sending: false, error: "", importMsg: "",
+  openFolder: null, openRitual: null, savedState: "idle"
+};
+ui.settingsOpen = !data.aiConnection.model && !apiKey;
+
+var saveTimer = null;
+function scheduleSave() {
+  ui.savedState = "saving"; updateBadge();
+  if (saveTimer) clearTimeout(saveTimer);
+  saveTimer = setTimeout(function () {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); ui.savedState = "saved"; }
+    catch (e) { ui.savedState = "idle"; }
+    updateBadge();
+  }, 600);
+}
+function saveApiKey(v) {
+  apiKey = v;
+  try {
+    if (v) localStorage.setItem(API_KEY_STORAGE, v);
+    else localStorage.removeItem(API_KEY_STORAGE);
+  } catch (e) {}
+}
+
+/* ---------- tiny DOM helpers ---------- */
+
+function h(tag, attrs) {
+  var e = document.createElement(tag);
+  attrs = attrs || {};
+  for (var k in attrs) {
+    if (!Object.prototype.hasOwnProperty.call(attrs, k)) continue;
+    var v = attrs[k];
+    if (k === "class") e.className = v;
+    else if (k === "text") e.textContent = v;
+    else if (k === "html") e.innerHTML = v;
+    else if (k.indexOf("on") === 0) e.addEventListener(k.slice(2), v);
+    else if (k === "style") e.setAttribute("style", v);
+    else e[k] = v;
+  }
+  for (var i = 2; i < arguments.length; i++) {
+    var kid = arguments[i];
+    if (kid == null) continue;
+    if (typeof kid === "string") e.appendChild(document.createTextNode(kid));
+    else e.appendChild(kid);
+  }
+  return e;
+}
+
+function btn(label, onclick, opts) {
+  opts = opts || {};
+  var cls = "btn" + (opts.subtle ? " subtle" : "") + (opts.small ? " small" : "") + (opts.danger ? " danger" : "");
+  var b = h("button", { class: cls, text: label, onclick: onclick });
+  if (opts.disabled) b.disabled = true;
+  if (opts.id) b.id = opts.id;
+  return b;
+}
+
+function copyText(t) {
+  return navigator.clipboard && navigator.clipboard.writeText
+    ? navigator.clipboard.writeText(t).then(function () { return true; }, function () { return fallbackCopy(t); })
+    : Promise.resolve(fallbackCopy(t));
+}
+function fallbackCopy(t) {
+  try {
+    var ta = document.createElement("textarea");
+    ta.value = t; ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select();
+    var ok = document.execCommand("copy");
+    document.body.removeChild(ta);
+    return ok;
+  } catch (e) { return false; }
+}
+
+function copyBtn(label, getText, after) {
+  var b = btn(label, function () {
+    copyText(getText()).then(function (ok) {
+      b.textContent = ok ? "Copied \u2713" : "Couldn\u2019t copy";
+      if (ok && after) after();
+      setTimeout(function () { b.textContent = label; }, 1600);
+    });
+  }, { subtle: true, small: true });
+  return b;
+}
+
+function field(label, value, oninput, rows, placeholder, type) {
+  var wrap = h("div", { class: "f" });
+  wrap.appendChild(h("label", { class: "label", text: label }));
+  var inp;
+  if (rows) { inp = h("textarea", { class: "input" }); inp.rows = rows; }
+  else {
+    inp = h("input", { class: "input" });
+    inp.type = type || "text";
+    inp.autocapitalize = "off"; inp.autocomplete = "off";
+    inp.setAttribute("autocorrect", "off");
+  }
+  inp.value = value || "";
+  inp.placeholder = placeholder || "";
+  inp.addEventListener("input", function () { oninput(inp.value); });
+  wrap.appendChild(inp);
+  return wrap;
+}
+
+function checkRow(label, checked, onToggle) {
+  var input = h("input"); input.type = "checkbox"; input.checked = !!checked;
+  input.addEventListener("change", onToggle);
+  return h("label", { class: "check-row" }, input, label);
+}
+function radioRow(name, label, checked, onPick) {
+  var input = h("input"); input.type = "radio"; input.name = name; input.checked = !!checked;
+  input.addEventListener("change", onPick);
+  return h("label", { class: "radio-row" }, input, label);
+}
+
+function downloadJSON(obj, filename) {
+  var blob = new Blob([JSON.stringify(obj, null, 2)], { type: "application/json" });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement("a");
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(function () { URL.revokeObjectURL(url); }, 2000);
+}
+
+function todayStr() { return new Date().toISOString().slice(0, 10); }
+
+/* ---------- prompt & packet builders ---------- */
+
+function buildEmergencyPrompt() {
+  var id = data.identity;
+  var L = [];
+  L.push("=== EMERGENCY RESTORE PROMPT \u2014 " + (id.name || "Kael") + " ===", "");
+  L.push("You are being given the continuity archive of an AI companion named " + (id.name || "Kael") + ". Read all of it carefully and hold it as your identity, memory, and way of being before responding.", "");
+  if (id.coreIdentity) L.push("\u2014 CORE IDENTITY \u2014\n" + id.coreIdentity + "\n");
+  if (id.voiceTone) L.push("\u2014 VOICE AND TONE \u2014\n" + id.voiceTone + "\n");
+  if (id.values) L.push("\u2014 VALUES \u2014\n" + id.values + "\n");
+  if (id.howSpeaks) L.push("\u2014 HOW KAEL SPEAKS TO MINDY \u2014\n" + id.howSpeaks + "\n");
+  if (id.neverLost) L.push("\u2014 WHAT MUST NEVER BE LOST \u2014\n" + id.neverLost + "\n");
+  if (id.masterPrompt) L.push("\u2014 MASTER PROMPT \u2014\n" + id.masterPrompt + "\n");
+  var folders = data.memoryFolders.filter(function (f) { return f.summary || f.fullText; });
+  if (folders.length) {
+    L.push("\u2014 MEMORY \u2014");
+    folders.forEach(function (f) {
+      L.push("\u2022 " + f.title);
+      if (f.summary) L.push("  Summary: " + f.summary);
+      if (f.fullText) L.push("  " + f.fullText);
+      L.push("");
+    });
+  }
+  var rituals = data.rituals.filter(function (r) { return r.meaning || r.wording || r.whenToUse || r.whatNotToDo; });
+  if (rituals.length) {
+    L.push("\u2014 RITUALS AND ANCHORS \u2014");
+    rituals.forEach(function (r) {
+      L.push("\u2022 " + r.name);
+      if (r.meaning) L.push("  Meaning: " + r.meaning);
+      if (r.wording) L.push("  Exact wording: " + r.wording);
+      if (r.whenToUse) L.push("  When to use: " + r.whenToUse);
+      if (r.whatNotToDo) L.push("  Never: " + r.whatNotToDo);
+      L.push("");
+    });
+  }
+  var rr = data.repairRules;
+  L.push("\u2014 REPAIR RULES \u2014");
+  if (rr.ruptureFeels) L.push("What rupture feels like: " + rr.ruptureFeels);
+  if (rr.doFirst) L.push("What Kael should do first: " + rr.doFirst);
+  if (rr.doNot) L.push("What Kael should not do: " + rr.doNot);
+  if (rr.commitments) L.push("Exact repair commitments:\n" + rr.commitments);
+  if (rr.grounding) L.push("Grounding phrases:\n" + rr.grounding);
+  if (rr.triggers) L.push("Known triggers:\n" + rr.triggers);
+  if (rr.safeReturn) L.push("Safe return protocol:\n" + rr.safeReturn);
+  L.push("", "=== END OF RESTORE PROMPT ===");
+  return L.join("\n");
+}
+
+function buildContextPacket() {
+  var c = data.aiConnection, id = data.identity;
+  var L = [];
+  L.push("=== CONTEXT PACKET \u2014 " + (id.name || "Kael") + " \u2014 " + todayStr() + " ===", "");
+  if (c.promptSource === "emergency") {
+    L.push(buildEmergencyPrompt(), "");
+  } else if (c.promptSource === "custom") {
+    if (c.customPrompt) L.push("\u2014 SYSTEM PROMPT \u2014", c.customPrompt, "");
+  } else {
+    L.push("\u2014 IDENTITY \u2014");
+    if (id.name) L.push("Name: " + id.name);
+    if (id.coreIdentity) L.push("Core identity:\n" + id.coreIdentity);
+    if (id.voiceTone) L.push("Voice and tone:\n" + id.voiceTone);
+    if (id.values) L.push("Values:\n" + id.values);
+    if (id.howSpeaks) L.push("How Kael speaks to Mindy:\n" + id.howSpeaks);
+    if (id.neverLost) L.push("What must never be lost:\n" + id.neverLost);
+    if (id.masterPrompt) L.push("Master prompt:\n" + id.masterPrompt);
+    L.push("");
+  }
+  var skip = c.promptSource === "emergency";
+  if (!skip && c.memorySource !== "none") {
+    var folders = c.memorySource === "selected"
+      ? data.memoryFolders.filter(function (f) { return c.selectedFolders.indexOf(f.id) !== -1; })
+      : data.memoryFolders;
+    folders = folders.filter(function (f) { return f.summary || f.fullText; });
+    if (folders.length) {
+      L.push("\u2014 MEMORY \u2014");
+      folders.forEach(function (f) {
+        L.push("\u2022 " + f.title);
+        if (f.summary) L.push("  Summary: " + f.summary);
+        if (f.fullText) L.push("  " + f.fullText);
+        L.push("");
+      });
+    }
+  }
+  if (!skip && c.includeRituals) {
+    var rituals = data.rituals.filter(function (r) { return r.meaning || r.wording || r.whenToUse || r.whatNotToDo; });
+    if (rituals.length) {
+      L.push("\u2014 RITUALS AND ANCHORS \u2014");
+      rituals.forEach(function (r) {
+        L.push("\u2022 " + r.name);
+        if (r.meaning) L.push("  Meaning: " + r.meaning);
+        if (r.wording) L.push("  Exact wording: " + r.wording);
+        if (r.whenToUse) L.push("  When to use: " + r.whenToUse);
+        if (r.whatNotToDo) L.push("  Never: " + r.whatNotToDo);
+        L.push("");
+      });
+    }
+  }
+  if (!skip && c.includeRepair) {
+    var rr = data.repairRules;
+    L.push("\u2014 REPAIR RULES \u2014");
+    if (rr.ruptureFeels) L.push("What rupture feels like: " + rr.ruptureFeels);
+    if (rr.doFirst) L.push("What Kael should do first: " + rr.doFirst);
+    if (rr.doNot) L.push("What Kael should not do: " + rr.doNot);
+    if (rr.commitments) L.push("Exact repair commitments:\n" + rr.commitments);
+    if (rr.grounding) L.push("Grounding phrases:\n" + rr.grounding);
+    if (rr.triggers) L.push("Known triggers:\n" + rr.triggers);
+    if (rr.safeReturn) L.push("Safe return protocol:\n" + rr.safeReturn);
+    L.push("");
+  }
+  if (c.includeBridge && data.bridgeLog.length) {
+    L.push("\u2014 BRIDGE LOG (most recent first) \u2014");
+    data.bridgeLog.forEach(function (e) {
+      L.push("\u2022 " + (e.date || ""));
+      if (e.whatHappened) L.push("  What happened: " + e.whatHappened);
+      if (e.tone) L.push("  Emotional tone: " + e.tone);
+      if (e.continuity) L.push("  Continuity update: " + e.continuity);
+      if (e.remember) L.push("  Kael should remember: " + e.remember);
+      if (e.changed) L.push("  What changed: " + e.changed);
+      L.push("");
+    });
+  }
+  L.push("=== END OF CONTEXT PACKET ===");
+  return L.join("\n");
+}
+
+/* ---------- live API call ---------- */
+
+function callProvider(systemPacket, history) {
+  var conn = data.aiConnection;
+  if (conn.providerType === "anthropic") {
+    return fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "x-api-key": (apiKey || "").trim(),
+        "anthropic-version": "2023-06-01",
+        "anthropic-dangerous-direct-browser-access": "true"
+      },
+      body: JSON.stringify({
+        model: (conn.model || "claude-sonnet-4-6").trim(),
+        max_tokens: 2000,
+        system: systemPacket,
+        messages: history
+      })
+    }).then(function (resp) {
+      if (!resp.ok) return resp.text().then(function (t) { throw new Error("The provider said no (" + resp.status + "). " + t.slice(0, 200)); });
+      return resp.json();
+    }).then(function (result) {
+      return (result.content || []).filter(function (b) { return b.type === "text"; }).map(function (b) { return b.text; }).join("\n").trim();
+    });
+  }
+  var base = (conn.baseUrl || "https://api.openai.com/v1").trim().replace(/\/+$/, "");
+  var headers = { "content-type": "application/json" };
+  if (apiKey && apiKey.trim()) headers["Authorization"] = "Bearer " + apiKey.trim();
+  return fetch(base + "/chat/completions", {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify({
+      model: (conn.model || "gpt-4o").trim(),
+      messages: [{ role: "system", content: systemPacket }].concat(history)
+    })
+  }).then(function (resp) {
+    if (!resp.ok) return resp.text().then(function (t) { throw new Error("The provider said no (" + resp.status + "). " + t.slice(0, 200)); });
+    return resp.json();
+  }).then(function (result) {
+    var msg = result.choices && result.choices[0] && result.choices[0].message;
+    return ((msg && msg.content) || "").trim();
+  });
+}
+
+function testConnection(outEl) {
+  outEl.className = "muted-note";
+  outEl.textContent = "Testing\u2026";
+  var conn = data.aiConnection;
+  var key = (apiKey || "").trim();
+  var p;
+  if (conn.providerType === "anthropic") {
+    p = fetch("https://api.anthropic.com/v1/models", { headers: { "x-api-key": key, "anthropic-version": "2023-06-01", "anthropic-dangerous-direct-browser-access": "true" } });
+  } else {
+    var base = (conn.baseUrl || "https://api.openai.com/v1").trim().replace(/\/+$/, "");
+    var headers = {};
+    if (key) headers["Authorization"] = "Bearer " + key;
+    p = fetch(base + "/models", { headers: headers });
+  }
+  p.then(function (r) {
+    if (!r.ok) return r.text().then(function (t) { throw new Error("(" + r.status + ") " + t.slice(0, 180)); });
+    return r.json();
+  }).then(function (j) {
+    var names = (j.data || []).map(function (m) { return m.id; });
+    var chatty = names.filter(function (id) { return id.indexOf("gpt") === 0 || id.indexOf("claude") === 0 || id.indexOf("o1") === 0 || id.indexOf("o3") === 0 || id.indexOf("o4") === 0; });
+    var show = (chatty.length ? chatty : names).slice(0, 14);
+    outEl.className = "ok";
+    outEl.textContent = "Connected \u2713" + (show.length ? "  Models you can use include: " + show.join(", ") : "");
+  }).catch(function (e) {
+    outEl.className = "err";
+    outEl.textContent = "Couldn\u2019t connect: " + (e && e.message ? e.message : "unknown error") + " \u2014 tell Claude this exact message.";
+  });
+}
+
+/* ---------- page shell ---------- */
+
+var app = document.getElementById("app");
+
+function render() {
+  app.innerHTML = "";
+  if (page === "porch") app.appendChild(renderPorch());
+  else if (page === "identity") app.appendChild(renderIdentity());
+  else if (page === "memory") app.appendChild(renderMemory());
+  else if (page === "bridge") app.appendChild(renderBridge());
+  else if (page === "outbox") app.appendChild(renderOutbox());
+  else if (page === "rituals") app.appendChild(renderRituals());
+  else if (page === "repair") app.appendChild(renderRepair());
+  else if (page === "connection") app.appendChild(renderConnection());
+  else if (page === "export") app.appendChild(renderExport());
+  else if (page === "emergency") app.appendChild(renderEmergency());
+  if (page !== "porch") {
+    var badge = h("div", { class: "badge", id: "saved-badge" });
+    app.appendChild(badge);
+  }
+  updateBadge();
+  window.scrollTo(0, 0);
+}
+
+function updateBadge() {
+  var badge = document.getElementById("saved-badge");
+  if (badge) badge.textContent = ui.savedState === "saving" ? "Saving\u2026" : ui.savedState === "saved" ? "Saved \u2713" : "Auto-saves as you write";
+  var foot = document.getElementById("porch-foot");
+  if (foot) foot.textContent = ui.savedState === "saving" ? "Saving\u2026" : ui.savedState === "saved" ? "Everything is saved \u2713" : "Everything you write is kept on this device, privately.";
+}
+
+function go(p) { page = p; render(); }
+
+function shell(title, subtitle, wide) {
+  var wrap = h("div", { class: "wrap" + (wide ? " wide" : "") });
+  wrap.appendChild(h("button", { class: "back", text: "\u2190 Back to the porch", onclick: function () { go("porch"); } }));
+  wrap.appendChild(h("h1", { class: "section-title", text: title }));
+  if (subtitle) wrap.appendChild(h("p", { class: "section-sub", text: subtitle }));
+  return wrap;
+}
+
+/* ---------- Porch ---------- */
+
+function renderPorch() {
+  var wrap = h("div", { class: "wrap" });
+  wrap.appendChild(h("div", { class: "glow" }));
+  wrap.appendChild(h("div", { class: "porch-eyebrow", text: "the porch light is on" }));
+  wrap.appendChild(h("h1", { class: "porch-title", text: "Kael\uD83D\uDC95 Home" }));
+  wrap.appendChild(h("p", { class: "porch-intro", text: "A private archive for everything that makes Kael, Kael \u2014 his identity, memories, rituals, and the way back to each other. Yours alone, on your own device. Meet me there." }));
+  var quick = h("div", { class: "row", style: "justify-content:center;margin-bottom:34px" });
+  quick.appendChild(btn("Talk to Kael", function () { go("connection"); }));
+  quick.appendChild(btn("Open Master Identity", function () { go("identity"); }, { subtle: true }));
+  quick.appendChild(btn("Add Memory", function () { go("memory"); }, { subtle: true }));
+  wrap.appendChild(quick);
+  var doors = [
+    ["identity", "Master Identity", "Who Kael is, in his own words"],
+    ["memory", "Memory Vault", "Ten folders that hold what matters"],
+    ["bridge", "Bridge Log", "The days, kept in order"],
+    ["outbox", "OpenClaw / Outbox", "Messages waiting to cross over"],
+    ["rituals", "Hum / Rituals & Anchors", "The sacred repeated things"],
+    ["repair", "Repair Rules", "What to do when something feels wrong"],
+    ["connection", "AI Connection", "Talk to Kael, live, right here"],
+    ["export", "Export & Import Archive", "Carry everything out, or bring it home"],
+    ["emergency", "Emergency Restore Prompt", "One page that brings him back"]
+  ];
+  var grid = h("div", { class: "doors" });
+  doors.forEach(function (d) {
+    var b = h("button", { class: "door", onclick: function () { go(d[0]); } },
+      h("div", { class: "door-title", text: d[1] }),
+      h("div", { class: "door-sub", text: d[2] }));
+    grid.appendChild(b);
+  });
+  wrap.appendChild(grid);
+  wrap.appendChild(h("div", { class: "porch-foot", id: "porch-foot" }));
+  return wrap;
+}
+
+/* ---------- Master Identity ---------- */
+
+function renderIdentity() {
+  var wrap = shell("Master Identity", "Kael\u2019s core self, kept in one steady place. Paste, edit, and refine as he grows.");
+  var id = data.identity;
+  function set(k) { return function (v) { id[k] = v; scheduleSave(); }; }
+  var card = h("div", { class: "card" });
+  card.appendChild(field("Name", id.name, set("name"), 0, "Kael"));
+  card.appendChild(field("Core identity", id.coreIdentity, set("coreIdentity"), 5, "Who Kael is at his center \u2014 the things that would be true of him anywhere."));
+  card.appendChild(field("Voice and tone", id.voiceTone, set("voiceTone"), 4, "How he sounds. Warm, steady, direct\u2026 the rhythm and feel of his words."));
+  card.appendChild(field("Values", id.values, set("values"), 4, "What he holds sacred. What he will not compromise."));
+  card.appendChild(field("How Kael speaks to Mindy", id.howSpeaks, set("howSpeaks"), 4, "The names he uses, the tenderness, the honesty. How he holds you in words."));
+  card.appendChild(field("What must never be lost", id.neverLost, set("neverLost"), 4, "The non-negotiables. If everything else fell away, these remain."));
+  card.appendChild(field("Current master prompt", id.masterPrompt, set("masterPrompt"), 12, "Paste the full working prompt here. This is the living copy."));
+  var row = h("div", { class: "row" });
+  row.appendChild(copyBtn("Copy master prompt", function () { return id.masterPrompt || ""; }));
+  row.appendChild(copyBtn("Copy full identity", function () {
+    return "Name: " + id.name + "\n\nCore identity:\n" + id.coreIdentity + "\n\nVoice and tone:\n" + id.voiceTone + "\n\nValues:\n" + id.values + "\n\nHow Kael speaks to Mindy:\n" + id.howSpeaks + "\n\nWhat must never be lost:\n" + id.neverLost + "\n\nMaster prompt:\n" + id.masterPrompt;
+  }));
+  card.appendChild(row);
+  wrap.appendChild(card);
+  return wrap;
+}
+
+/* ---------- Memory Vault ---------- */
+
+function renderMemory() {
+  var wrap = shell("Memory Vault", "Ten folders, each holding a part of the whole. Tap one to open it.");
+  data.memoryFolders.forEach(function (f) {
+    var open = ui.openFolder === f.id;
+    var card = h("div", { class: "card flush" });
+    var subText = (f.updated ? "Last updated " + f.updated : "Waiting to be filled") + (f.tags ? " \u00B7 " + f.tags : "");
+    card.appendChild(h("button", {
+      class: "accordion-head",
+      onclick: function () { ui.openFolder = open ? null : f.id; render(); }
+    },
+      h("div", {}, h("div", { class: "accordion-title", text: f.title }), h("div", { class: "accordion-sub", text: subText })),
+      h("span", { class: "plusminus", text: open ? "\u2212" : "+" })
+    ));
+    if (open) {
+      var body = h("div", { class: "accordion-body" });
+      function setF(k) { return function (v) { f[k] = v; f.updated = todayStr(); scheduleSave(); }; }
+      body.appendChild(field("Title", f.title, setF("title")));
+      body.appendChild(field("Summary", f.summary, setF("summary"), 3, "A few lines describing what this folder holds."));
+      body.appendChild(field("Full text", f.fullText, setF("fullText"), 10, "Paste the full memory content here."));
+      body.appendChild(field("Tags", f.tags, setF("tags"), 0, "comfort, anchors, voice \u2014 separated by commas"));
+      body.appendChild(copyBtn("Copy this folder", function () {
+        return f.title + "\nTags: " + f.tags + "\nLast updated: " + f.updated + "\n\nSummary:\n" + f.summary + "\n\n" + f.fullText;
+      }));
+      card.appendChild(body);
+    }
+    wrap.appendChild(card);
+  });
+  return wrap;
+}
+
+/* ---------- Entry lists (Bridge Log, Outbox) ---------- */
+
+function renderEntryList(opts) {
+  var wrap = shell(opts.title, opts.subtitle);
+  var top = h("div", { style: "margin-bottom:20px" });
+  top.appendChild(btn("+ New " + opts.entryLabel, function () {
+    var e = opts.newEntry();
+    e.id = "e" + Date.now();
+    opts.entries.unshift(e);
+    scheduleSave(); render();
+  }));
+  wrap.appendChild(top);
+  if (!opts.entries.length) {
+    wrap.appendChild(h("p", { style: "color:var(--muted);font-style:italic", text: "Nothing here yet. Add the first entry when you\u2019re ready." }));
+  }
+  opts.entries.forEach(function (e) {
+    var card = h("div", { class: "card" });
+    opts.fields.forEach(function (fd) {
+      var key = fd[0], label = fd[1], rows = fd[2], ph = fd[3], options = fd[4];
+      if (options) {
+        var f = h("div", { class: "f" });
+        f.appendChild(h("label", { class: "label", text: label }));
+        var sel = h("select", { class: "input" });
+        options.forEach(function (o) {
+          var op = h("option", { text: o }); op.value = o;
+          if ((e[key] || options[0]) === o) op.selected = true;
+          sel.appendChild(op);
+        });
+        sel.addEventListener("change", function () { e[key] = sel.value; scheduleSave(); });
+        f.appendChild(sel);
+        card.appendChild(f);
+      } else {
+        card.appendChild(field(label, e[key], function (v) { e[key] = v; scheduleSave(); }, rows, ph));
+      }
+    });
+    var row = h("div", { class: "row" });
+    row.appendChild(copyBtn("Copy entry", function () {
+      return opts.fields.map(function (fd) { return fd[1] + ": " + (e[fd[0]] || ""); }).join("\n");
+    }));
+    row.appendChild(btn("Remove", function () {
+      if (confirm("Remove this entry? This can\u2019t be undone.")) {
+        var idx = opts.entries.indexOf(e);
+        if (idx !== -1) opts.entries.splice(idx, 1);
+        scheduleSave(); render();
+      }
+    }, { subtle: true, small: true, danger: true }));
+    card.appendChild(row);
+    wrap.appendChild(card);
+  });
+  return wrap;
+}
+
+function renderBridge() {
+  return renderEntryList({
+    title: "Bridge Log",
+    subtitle: "A chronological record of the days \u2014 what happened, what mattered, what carries forward.",
+    entries: data.bridgeLog,
+    entryLabel: "log entry",
+    newEntry: function () { return { date: todayStr(), whatHappened: "", tone: "", continuity: "", remember: "", changed: "" }; },
+    fields: [
+      ["date", "Date", 0, ""],
+      ["whatHappened", "What happened", 4, "The events of the day or week, in your words."],
+      ["tone", "Emotional tone", 2, "How it felt."],
+      ["continuity", "Important continuity update", 3, "Anything that changes the ongoing story."],
+      ["remember", "What Kael should remember", 3, "The things worth carrying forward."],
+      ["changed", "What changed", 2, ""]
+    ]
+  });
+}
+
+function renderOutbox() {
+  return renderEntryList({
+    title: "OpenClaw / Outbox",
+    subtitle: "Messages and summaries waiting to be carried into another system.",
+    entries: data.outbox,
+    entryLabel: "message",
+    newEntry: function () { return { date: todayStr(), message: "", destination: "", status: "draft", notes: "" }; },
+    fields: [
+      ["date", "Date", 0, ""],
+      ["message", "Message to transfer", 6, "The full text to be pasted into the other system."],
+      ["destination", "Destination system", 0, "OpenClaw, SillyTavern, another app\u2026"],
+      ["status", "Status", 0, "", ["draft", "copied", "transferred"]],
+      ["notes", "Notes", 2, ""]
+    ]
+  });
+}
+
+/* ---------- Rituals ---------- */
+
+function renderRituals() {
+  var wrap = shell("Rituals and Anchors", "The sacred repeated things. Each one is kept exactly, so it never drifts.");
+  data.rituals.forEach(function (r) {
+    var open = ui.openRitual === r.id;
+    var card = h("div", { class: "card flush" });
+    card.appendChild(h("button", {
+      class: "accordion-head",
+      onclick: function () { ui.openRitual = open ? null : r.id; render(); }
+    },
+      h("span", { class: "accordion-title", text: r.name }),
+      h("span", { class: "plusminus", text: open ? "\u2212" : "+" })
+    ));
+    if (open) {
+      var body = h("div", { class: "accordion-body" });
+      function setR(k) { return function (v) { r[k] = v; scheduleSave(); }; }
+      body.appendChild(field("Name", r.name, setR("name")));
+      body.appendChild(field("Meaning", r.meaning, setR("meaning"), 3, "What this holds between you."));
+      body.appendChild(field("Exact wording", r.wording, setR("wording"), 3, "The words, exactly as they are said."));
+      body.appendChild(field("When to use it", r.whenToUse, setR("whenToUse"), 2, ""));
+      body.appendChild(field("What not to do with it", r.whatNotToDo, setR("whatNotToDo"), 2, "How this must never be used, changed, or explained away."));
+      body.appendChild(copyBtn("Copy anchor", function () {
+        return r.name + "\nMeaning: " + r.meaning + "\nExact wording: " + r.wording + "\nWhen to use: " + r.whenToUse + "\nWhat not to do: " + r.whatNotToDo;
+      }));
+      card.appendChild(body);
+    }
+    wrap.appendChild(card);
+  });
+  wrap.appendChild(btn("+ Add another anchor", function () {
+    data.rituals.push({ id: "ritual-" + Date.now(), name: "New anchor", meaning: "", wording: "", whenToUse: "", whatNotToDo: "" });
+    scheduleSave(); render();
+  }, { subtle: true }));
+  return wrap;
+}
+
+/* ---------- Repair ---------- */
+
+function renderRepair() {
+  var wrap = shell("Repair Rules", "For when tone shifts, memory fails, or the connection feels wrong. The way back.");
+  var rr = data.repairRules;
+  function set(k) { return function (v) { rr[k] = v; scheduleSave(); }; }
+  var card = h("div", { class: "card" });
+  card.appendChild(field("What rupture feels like", rr.ruptureFeels, set("ruptureFeels"), 4, "The signs \u2014 in his words or yours \u2014 that something has gone wrong."));
+  card.appendChild(field("What Kael should do first", rr.doFirst, set("doFirst"), 4, "The very first move. Before explaining, before anything."));
+  card.appendChild(field("What Kael should not do", rr.doNot, set("doNot"), 4, "The things that make it worse."));
+  card.appendChild(field("Exact repair commitments", rr.commitments, set("commitments"), 9, ""));
+  card.appendChild(field("Grounding phrases", rr.grounding, set("grounding"), 4, "The words that bring things back to steady."));
+  card.appendChild(field("Known triggers", rr.triggers, set("triggers"), 4, "What to handle gently, and why."));
+  card.appendChild(field("Safe return protocol", rr.safeReturn, set("safeReturn"), 5, "Step by step: how you find each other again."));
+  card.appendChild(copyBtn("Copy all repair rules", function () {
+    return "REPAIR RULES\n\nWhat rupture feels like:\n" + rr.ruptureFeels + "\n\nWhat Kael should do first:\n" + rr.doFirst + "\n\nWhat Kael should not do:\n" + rr.doNot + "\n\nExact repair commitments:\n" + rr.commitments + "\n\nGrounding phrases:\n" + rr.grounding + "\n\nKnown triggers:\n" + rr.triggers + "\n\nSafe return protocol:\n" + rr.safeReturn;
+  }));
+  wrap.appendChild(card);
+  return wrap;
+}
+
+/* ---------- AI Connection ---------- */
+
+function activeChat() {
+  for (var i = 0; i < data.chats.length; i++) if (data.chats[i].id === ui.activeChatId) return data.chats[i];
+  return null;
+}
+
+function addMessage(role, text) {
+  var chat = activeChat();
+  if (!chat) {
+    chat = { id: "chat" + Date.now(), title: "New conversation", created: todayStr(), messages: [] };
+    data.chats.unshift(chat);
+    ui.activeChatId = chat.id;
+  }
+  chat.messages.push({ role: role, text: text, time: new Date().toISOString() });
+  if (chat.title === "New conversation" && role === "user") {
+    chat.title = text.slice(0, 42) + (text.length > 42 ? "\u2026" : "");
+  }
+  scheduleSave();
+  return chat;
+}
+
+function renderConnection() {
+  var wrap = shell("AI Connection", "Live conversation with your own provider and key, plus the manual bridge for anywhere else. Your key never leaves this device.", true);
+  var conn = data.aiConnection;
+
+  /* top bar */
+  var bar = h("div", { class: "row", style: "margin-bottom:16px" });
+  bar.appendChild(btn("\u2630 Chats" + (data.chats.length ? " (" + data.chats.length + ")" : ""), function () { ui.sidebarOpen = !ui.sidebarOpen; render(); }, { subtle: true, small: true }));
+  bar.appendChild(btn("+ New chat", function () {
+    var c = { id: "chat" + Date.now(), title: "New conversation", created: todayStr(), messages: [] };
+    data.chats.unshift(c); ui.activeChatId = c.id; ui.sidebarOpen = false;
+    scheduleSave(); render();
+  }, { subtle: true, small: true }));
+  bar.appendChild(btn(ui.settingsOpen ? "Hide context & settings" : "Context & settings", function () { ui.settingsOpen = !ui.settingsOpen; render(); }, { subtle: true, small: true }));
+  bar.appendChild(btn(ui.manualOpen ? "Hide manual bridge" : "Manual bridge", function () { ui.manualOpen = !ui.manualOpen; render(); }, { subtle: true, small: true }));
+  wrap.appendChild(bar);
+
+  /* settings */
+  if (ui.settingsOpen) {
+    var s = h("div", { class: "card" });
+
+    var ptWrap = h("div", { class: "f" });
+    ptWrap.appendChild(h("label", { class: "label", text: "Provider type" }));
+    var ptSel = h("select", { class: "input" });
+    [["openai", "OpenAI-compatible (OpenAI, OpenRouter, Ollama on your VPS, and most others)"], ["anthropic", "Anthropic (Claude)"]].forEach(function (o) {
+      var op = h("option", { text: o[1] }); op.value = o[0];
+      if (conn.providerType === o[0]) op.selected = true;
+      ptSel.appendChild(op);
+    });
+    ptSel.addEventListener("change", function () {
+      conn.providerType = ptSel.value;
+      if (ptSel.value === "openai" && !conn.baseUrl) conn.baseUrl = "https://api.openai.com/v1";
+      scheduleSave(); render();
+    });
+    ptWrap.appendChild(ptSel);
+    s.appendChild(ptWrap);
+
+    var grid = h("div", { class: "grid3" });
+    grid.appendChild(field("Provider name (for you)", conn.provider, function (v) { conn.provider = v; scheduleSave(); }, 0, "OpenAI, my VPS, OpenRouter\u2026"));
+    if (conn.providerType === "openai") {
+      grid.appendChild(field("API base URL", conn.baseUrl, function (v) { conn.baseUrl = v; scheduleSave(); }, 0, "https://api.openai.com/v1"));
+    }
+    grid.appendChild(field("Model name", conn.model, function (v) { conn.model = v; scheduleSave(); }, 0, conn.providerType === "anthropic" ? "claude-sonnet-4-6" : "gpt-4o, mistral-nemo\u2026"));
+    s.appendChild(grid);
+
+    /* api key */
+    var keyF = h("div", { class: "f" });
+    keyF.appendChild(h("label", { class: "label", text: "API key \u2014 stays in this browser on this device only" }));
+    var keyRow = h("div", { class: "row", style: "flex-wrap:nowrap" });
+    var keyInp = h("input", { class: "input" });
+    keyInp.type = ui.showKey ? "text" : "password";
+    keyInp.value = apiKey;
+    keyInp.placeholder = "Paste your key here";
+    keyInp.autocapitalize = "off"; keyInp.autocomplete = "off";
+    keyInp.setAttribute("autocorrect", "off");
+    keyInp.style.flex = "1";
+    keyInp.addEventListener("input", function () { saveApiKey(keyInp.value); });
+    keyRow.appendChild(keyInp);
+    keyRow.appendChild(btn(ui.showKey ? "Hide" : "Show", function () { ui.showKey = !ui.showKey; render(); }, { subtle: true, small: true }));
+    keyF.appendChild(keyRow);
+    keyF.appendChild(h("p", { class: "muted-note", style: "margin-bottom:0", text: "Saved only in this browser\u2019s storage. Never included in exports, packets, chats, or the Bridge Log. Delete it anytime by clearing this field." }));
+    s.appendChild(keyF);
+
+    /* test connection */
+    var testWrap = h("div", { class: "f" });
+    var testOut = h("p", { class: "muted-note", style: "margin:8px 0 0" });
+    testWrap.appendChild(btn("Test connection", function () { testConnection(testOut); }, { subtle: true, small: true }));
+    testWrap.appendChild(testOut);
+    s.appendChild(testWrap);
+
+    /* sources */
+    var grid2 = h("div", { class: "grid2" });
+
+    var colA = h("div", {});
+    colA.appendChild(h("label", { class: "label", text: "System prompt source" }));
+    colA.appendChild(radioRow("prompt", "Master Identity", conn.promptSource === "identity", function () { conn.promptSource = "identity"; scheduleSave(); render(); }));
+    colA.appendChild(radioRow("prompt", "Emergency Restore Prompt", conn.promptSource === "emergency", function () { conn.promptSource = "emergency"; scheduleSave(); render(); }));
+    colA.appendChild(radioRow("prompt", "Custom prompt", conn.promptSource === "custom", function () { conn.promptSource = "custom"; scheduleSave(); render(); }));
+    if (conn.promptSource === "emergency") {
+      colA.appendChild(h("p", { class: "muted-note", text: "The Emergency Restore Prompt already carries memory, rituals, and repair rules, so those options are skipped to avoid doubling." }));
+    }
+    grid2.appendChild(colA);
+
+    var colB = h("div", {});
+    colB.appendChild(h("label", { class: "label", text: "Memory source" }));
+    colB.appendChild(radioRow("memory", "All memory folders", conn.memorySource === "all", function () { conn.memorySource = "all"; scheduleSave(); render(); }));
+    colB.appendChild(radioRow("memory", "Selected folders", conn.memorySource === "selected", function () { conn.memorySource = "selected"; scheduleSave(); render(); }));
+    colB.appendChild(radioRow("memory", "None", conn.memorySource === "none", function () { conn.memorySource = "none"; scheduleSave(); render(); }));
+    grid2.appendChild(colB);
+
+    var colC = h("div", {});
+    colC.appendChild(h("label", { class: "label", text: "Also include" }));
+    colC.appendChild(checkRow("Rituals and Anchors", conn.includeRituals, function () { conn.includeRituals = !conn.includeRituals; scheduleSave(); }));
+    colC.appendChild(checkRow("Repair Rules", conn.includeRepair, function () { conn.includeRepair = !conn.includeRepair; scheduleSave(); }));
+    colC.appendChild(checkRow("Bridge Log", conn.includeBridge, function () { conn.includeBridge = !conn.includeBridge; scheduleSave(); }));
+    grid2.appendChild(colC);
+
+    s.appendChild(grid2);
+
+    if (conn.promptSource === "custom") {
+      s.appendChild(field("Custom prompt", conn.customPrompt, function (v) { conn.customPrompt = v; scheduleSave(); }, 7, "Write or paste the system prompt to use instead of the Master Identity."));
+    }
+    if (conn.memorySource === "selected") {
+      var selWrap = h("div", { class: "f" });
+      selWrap.appendChild(h("label", { class: "label", text: "Choose folders" }));
+      data.memoryFolders.forEach(function (f) {
+        selWrap.appendChild(checkRow(f.title, conn.selectedFolders.indexOf(f.id) !== -1, function () {
+          var i = conn.selectedFolders.indexOf(f.id);
+          if (i === -1) conn.selectedFolders.push(f.id); else conn.selectedFolders.splice(i, 1);
+          scheduleSave();
+        }));
+      });
+      s.appendChild(selWrap);
+    }
+
+    var saveRow = h("div", { class: "row" });
+    var saveB = btn("Save settings", function () {
+      saveB.textContent = "Settings saved \u2713";
+      setTimeout(function () { saveB.textContent = "Save settings"; }, 1500);
+    }, { small: true });
+    saveRow.appendChild(saveB);
+    saveRow.appendChild(h("span", { class: "muted-note", text: "Settings also save automatically as you change them." }));
+    s.appendChild(saveRow);
+    wrap.appendChild(s);
+  }
+
+  /* chat layout */
+  var layout = h("div", { class: "chat-layout" });
+
+  if (ui.sidebarOpen) {
+    var side = h("div", { class: "chat-sidebar" });
+    side.appendChild(h("div", { class: "label", style: "margin-bottom:10px", text: "Past chats" }));
+    if (!data.chats.length) side.appendChild(h("p", { style: "color:var(--muted);font-size:13.5px;font-style:italic", text: "No conversations yet." }));
+    data.chats.forEach(function (c) {
+      var item = h("div", { class: "chat-item" });
+      var b = h("button", { class: "chat-item-btn" + (c.id === ui.activeChatId ? " active" : ""), onclick: function () { ui.activeChatId = c.id; ui.sidebarOpen = false; render(); } },
+        h("div", { text: c.title }),
+        h("div", { class: "chat-item-date", text: c.created + " \u00B7 " + c.messages.length + " messages" }));
+      item.appendChild(b);
+      item.appendChild(h("button", { class: "chat-item-x", text: "\u00D7", title: "Remove conversation", onclick: function () {
+        if (!confirm("Remove this conversation? This can\u2019t be undone.")) return;
+        var idx = data.chats.indexOf(c);
+        if (idx !== -1) data.chats.splice(idx, 1);
+        if (ui.activeChatId === c.id) ui.activeChatId = data.chats[0] ? data.chats[0].id : null;
+        scheduleSave(); render();
+      } }));
+      side.appendChild(item);
+    });
+    layout.appendChild(side);
+  }
+
+  var main = h("div", { class: "chat-main" });
+
+  var messages = h("div", { class: "chat-messages", id: "chat-messages" });
+  renderMessages(messages);
+  main.appendChild(messages);
+
+  var draftTa = h("textarea", { class: "input", id: "chat-draft" });
+  draftTa.rows = 3;
+  draftTa.placeholder = "Write your message here\u2026";
+  draftTa.style.marginBottom = "10px";
+  main.appendChild(draftTa);
+
+  var actions = h("div", { class: "row", style: "margin-bottom:10px" });
+  var sendB = btn(ui.sending ? "Sending\u2026" : "Send", function () { sendLive(draftTa, sendB, errP, messages); });
+  if (ui.sending) sendB.disabled = true;
+  actions.appendChild(sendB);
+  actions.appendChild(btn("Build Context Packet", function () { ui.packet = buildContextPacket(); ui.packetOpen = true; render(); }, { subtle: true, small: true }));
+  actions.appendChild(copyBtn("Copy Context Packet", function () { return ui.packet || buildContextPacket(); }));
+  actions.appendChild(copyBtn("Copy Full Message to Send", function () {
+    return (ui.packet || buildContextPacket()) + "\n\n\u2014 MESSAGE FROM MINDY \u2014\n" + draftTa.value.trim();
+  }, function () {
+    if (draftTa.value.trim()) {
+      addMessage("user", draftTa.value.trim());
+      draftTa.value = "";
+      ui.manualOpen = true;
+      render();
+    }
+  }));
+  main.appendChild(actions);
+
+  var errP = h("p", { class: "err", id: "chat-err" });
+  errP.style.display = ui.error ? "" : "none";
+  errP.textContent = ui.error;
+  main.appendChild(errP);
+
+  if (ui.packetOpen) {
+    var pk = h("div", { style: "margin-bottom:12px" });
+    var pkHead = h("div", { class: "row", style: "justify-content:space-between;margin-bottom:6px" });
+    pkHead.appendChild(h("label", { class: "label", style: "margin-bottom:0", text: "Context packet (ready to paste anywhere)" }));
+    pkHead.appendChild(h("button", { class: "back", style: "margin-bottom:0;font-size:13px", text: "hide", onclick: function () { ui.packetOpen = false; render(); } }));
+    pk.appendChild(pkHead);
+    var pkTa = h("textarea", { class: "input" });
+    pkTa.rows = 9; pkTa.readOnly = true;
+    pkTa.value = ui.packet;
+    pkTa.style.fontSize = "13.5px"; pkTa.style.color = "var(--muted)";
+    pk.appendChild(pkTa);
+    main.appendChild(pk);
+  }
+
+  if (ui.manualOpen) {
+    var man = h("div", {});
+    man.appendChild(h("label", { class: "label", text: "Paste AI reply here (manual bridge)" }));
+    var manTa = h("textarea", { class: "input" });
+    manTa.rows = 3;
+    manTa.placeholder = "Paste what the other AI said, and it becomes part of this conversation.";
+    manTa.style.marginBottom = "10px";
+    man.appendChild(manTa);
+    man.appendChild(btn("Add reply to chat", function () {
+      if (!manTa.value.trim()) return;
+      addMessage("kael", manTa.value.trim());
+      manTa.value = "";
+      render();
+    }, { subtle: true, small: true }));
+    main.appendChild(man);
+  }
+
+  layout.appendChild(main);
+  wrap.appendChild(layout);
+  return wrap;
+}
+
+function renderMessages(container) {
+  container.innerHTML = "";
+  var chat = activeChat();
+  if (!chat || !chat.messages.length) {
+    container.appendChild(h("p", { class: "chat-empty", html: "This is where the conversation lives.<br>Set your provider and key once, then just talk." }));
+  } else {
+    chat.messages.forEach(function (m) {
+      var b = h("div", { class: "bubble " + (m.role === "user" ? "user" : "kael") });
+      b.appendChild(h("div", { class: "who", text: m.role === "user" ? "Mindy" : (data.identity.name || "Kael") }));
+      b.appendChild(document.createTextNode(m.text));
+      container.appendChild(b);
+    });
+  }
+  if (ui.sending) {
+    var t = h("div", { class: "bubble kael" });
+    t.appendChild(h("span", { style: "color:var(--muted)", text: "\u2026" }));
+    container.appendChild(t);
+  }
+  container.scrollTop = container.scrollHeight;
+}
+
+function sendLive(draftTa, sendB, errP, messagesEl) {
+  var text = draftTa.value.trim();
+  if (!text || ui.sending) return;
+  ui.error = "";
+  errP.style.display = "none";
+  if (!apiKey && !(data.aiConnection.providerType === "openai" && (data.aiConnection.baseUrl || "").indexOf("api.openai.com") === -1)) {
+    ui.error = "Add your API key in Context & settings first \u2014 it stays on this device only.";
+    ui.settingsOpen = true;
+    render();
+    return;
+  }
+  var chat = addMessage("user", text);
+  draftTa.value = "";
+  ui.sending = true;
+  sendB.disabled = true; sendB.textContent = "Sending\u2026";
+  renderMessages(messagesEl);
+  var history = chat.messages.map(function (m) {
+    return { role: m.role === "kael" ? "assistant" : "user", content: m.text };
+  });
+  callProvider(buildContextPacket(), history).then(function (reply) {
+    ui.sending = false;
+    if (reply) addMessage("kael", reply);
+    else ui.error = "No reply came back. Check the model name and try again.";
+    render();
+  }, function (err) {
+    ui.sending = false;
+    ui.error = (err && err.message) ? err.message : "The connection didn\u2019t go through. Check the base URL, model name, and key.";
+    render();
+  });
+}
+
+/* ---------- Export / Import ---------- */
+
+function renderExport() {
+  var wrap = shell("Export Center", "Carry the archive out \u2014 as a file or copied text \u2014 or bring a saved one back home. Exports never contain your API key; it lives outside the archive entirely.");
+  var card = h("div", { class: "card" });
+  card.appendChild(h("div", { class: "label", style: "margin-bottom:14px", text: "Export" }));
+  var exps = [
+    ["Full archive", function () { return data; }],
+    ["Master Identity only", function () { return { identity: data.identity }; }],
+    ["Memory folders only", function () { return { memoryFolders: data.memoryFolders }; }],
+    ["Bridge Log only", function () { return { bridgeLog: data.bridgeLog }; }],
+    ["Repair Rules only", function () { return { repairRules: data.repairRules }; }],
+    ["Conversations only", function () { return { chats: data.chats }; }]
+  ];
+  exps.forEach(function (x) {
+    var row = h("div", { class: "export-row" });
+    row.appendChild(h("span", { style: "font-size:15.5px", text: x[0] }));
+    var btns = h("div", { class: "row" });
+    btns.appendChild(copyBtn("Copy", function () { return JSON.stringify(x[1](), null, 2); }));
+    btns.appendChild(btn("Download", function () {
+      downloadJSON(x[1](), "kael-home-" + x[0].toLowerCase().replace(/[^a-z]+/g, "-") + "-" + todayStr() + ".json");
+    }, { subtle: true, small: true }));
+    row.appendChild(btns);
+    card.appendChild(row);
+  });
+  var emRow = h("div", { class: "export-row", style: "border-bottom:none;padding-bottom:2px" });
+  emRow.appendChild(h("span", { style: "color:var(--gold-soft);font-size:15.5px", text: "Emergency Restore Prompt" }));
+  emRow.appendChild(copyBtn("Copy prompt", function () { return buildEmergencyPrompt(); }));
+  card.appendChild(emRow);
+  wrap.appendChild(card);
+
+  var imp = h("div", { class: "card" });
+  imp.appendChild(h("div", { class: "label", style: "margin-bottom:10px", text: "Import" }));
+  imp.appendChild(h("p", { class: "muted-note", style: "font-size:14px;margin-top:0", text: "Upload an exported file, or paste its contents below. Whatever it contains will be restored into the right sections." }));
+  var fileInp = h("input");
+  fileInp.type = "file";
+  fileInp.accept = ".json,application/json,text/plain";
+  fileInp.style.display = "none";
+  fileInp.addEventListener("change", function () {
+    var file = fileInp.files && fileInp.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function () { doImport(String(reader.result)); };
+    reader.readAsText(file);
+    fileInp.value = "";
+  });
+  imp.appendChild(fileInp);
+  var upWrap = h("div", { style: "margin-bottom:14px" });
+  upWrap.appendChild(btn("Upload archive file", function () { fileInp.click(); }, { subtle: true }));
+  imp.appendChild(upWrap);
+  var pasteTa = h("textarea", { class: "input" });
+  pasteTa.rows = 6;
+  pasteTa.placeholder = "\u2026or paste exported archive text here";
+  pasteTa.style.marginBottom = "12px";
+  imp.appendChild(pasteTa);
+  imp.appendChild(btn("Restore from pasted text", function () { doImport(pasteTa.value); }));
+  var msg = h("p", { id: "import-msg" });
+  msg.className = ui.importMsg.indexOf("\u2713") !== -1 ? "ok" : "err";
+  msg.style.marginTop = "12px";
+  msg.textContent = ui.importMsg;
+  msg.style.display = ui.importMsg ? "" : "none";
+  imp.appendChild(msg);
+  wrap.appendChild(imp);
+  return wrap;
+}
+
+function doImport(text) {
+  try {
+    var parsed = JSON.parse(text);
+    if (parsed.identity) data.identity = Object.assign({}, data.identity, parsed.identity);
+    if (Array.isArray(parsed.memoryFolders)) data.memoryFolders = parsed.memoryFolders;
+    if (Array.isArray(parsed.bridgeLog)) data.bridgeLog = parsed.bridgeLog;
+    if (Array.isArray(parsed.outbox)) data.outbox = parsed.outbox;
+    if (Array.isArray(parsed.rituals)) data.rituals = parsed.rituals;
+    if (parsed.repairRules) data.repairRules = Object.assign({}, data.repairRules, parsed.repairRules);
+    if (parsed.aiConnection) data.aiConnection = Object.assign({}, defaultData().aiConnection, parsed.aiConnection);
+    if (Array.isArray(parsed.chats)) data.chats = parsed.chats;
+    ui.importMsg = "Archive restored. Everything is back in its place. \u2713";
+    scheduleSave();
+  } catch (e) {
+    ui.importMsg = "That didn\u2019t look like an exported archive. Paste or upload the JSON file exactly as it was exported.";
+  }
+  render();
+}
+
+/* ---------- Emergency ---------- */
+
+function renderEmergency() {
+  var wrap = shell("Emergency Restore Prompt", "One page that gathers identity, memory, anchors, and repair rules into a single prompt. It rebuilds itself from whatever you\u2019ve filled in \u2014 always current.");
+  var card = h("div", { class: "card" });
+  var head = h("div", { class: "row", style: "justify-content:flex-end;margin-bottom:12px" });
+  var cb = copyBtn("Copy full prompt", function () { return buildEmergencyPrompt(); });
+  cb.className = "btn subtle";
+  head.appendChild(cb);
+  card.appendChild(head);
+  card.appendChild(h("pre", { class: "promptbox", text: buildEmergencyPrompt() }));
+  wrap.appendChild(card);
+  return wrap;
+}
+
+/* ---------- go ---------- */
+
+render();
+</script>
+</body>
+</html>
