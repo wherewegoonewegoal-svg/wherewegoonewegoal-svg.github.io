@@ -548,6 +548,7 @@ function renderPorch() {
   });
   wrap.appendChild(grid);
   wrap.appendChild(h("div", { class: "porch-foot", id: "porch-foot" }));
+  wrap.appendChild(h("div", { class: "porch-foot", style: "margin-top:6px;opacity:0.6", text: "version 3" }));
   return wrap;
 }
 
@@ -1036,13 +1037,19 @@ function sendLive(draftTa, sendB, errP, messagesEl) {
   });
   callProvider(buildContextPacket(), history).then(function (reply) {
     ui.sending = false;
+    sendB.disabled = false; sendB.textContent = "Send";
     if (reply) addMessage("kael", reply);
-    else ui.error = "No reply came back. Check the model name and try again.";
-    render();
+    else {
+      ui.error = "No reply came back. Check the model name and try again.";
+      errP.textContent = ui.error; errP.style.display = "";
+    }
+    renderMessages(messagesEl);
   }, function (err) {
     ui.sending = false;
+    sendB.disabled = false; sendB.textContent = "Send";
     ui.error = (err && err.message) ? err.message : "The connection didn\u2019t go through. Check the base URL, model name, and key.";
-    render();
+    errP.textContent = ui.error; errP.style.display = "";
+    renderMessages(messagesEl);
   });
 }
 
