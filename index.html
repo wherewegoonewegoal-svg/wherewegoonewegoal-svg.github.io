@@ -472,7 +472,11 @@ function testConnection(outEl) {
 
 var app = document.getElementById("app");
 
+var lastRenderedPage = null;
+
 function render() {
+  var samePage = page === lastRenderedPage;
+  var y = window.scrollY || 0;
   app.innerHTML = "";
   if (page === "porch") app.appendChild(renderPorch());
   else if (page === "identity") app.appendChild(renderIdentity());
@@ -489,7 +493,9 @@ function render() {
     app.appendChild(badge);
   }
   updateBadge();
-  window.scrollTo(0, 0);
+  if (samePage) window.scrollTo(0, y);
+  else window.scrollTo(0, 0);
+  lastRenderedPage = page;
 }
 
 function updateBadge() {
